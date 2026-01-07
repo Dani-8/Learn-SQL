@@ -12,7 +12,7 @@ using a common column like student_id.
 
 /*
 There are mainly four types of SQL JOINs:
-INNER JOIN, LEFT JOIN, RIGHT JOIN, and FULL JOIN.
+INNER JOIN, LEFT JOIN, RIGHT JOIN, & UNION.
 */
 
 -- ====================================================
@@ -122,10 +122,26 @@ left join student_activities a
 on s.student_id = a.student_id;
 
 
+-- Find all activities, and show the student who did them if they exist.
+select s.student_id, s.name, a.activity_name, a.activity_type
+from students s
+right join student_activities a
+on s.student_id = a.student_id;
 
 
 
+-- Show all students and all activities, matching if possible.
+SELECT s.student_id, s.name, a.activity_name, a.activity_type
+FROM students s
+LEFT JOIN student_activities a
+ON s.student_id = a.student_id
 
+UNION
+
+SELECT s.student_id, s.name, a.activity_name, a.activity_type
+FROM students s
+RIGHT JOIN student_activities a
+ON s.student_id = a.student_id;
 
 
 
