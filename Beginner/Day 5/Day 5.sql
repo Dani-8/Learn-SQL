@@ -106,14 +106,104 @@ select * from student_activities;
 
 -- ==================================================================== 
 
+/*
+INNER JOIN:
+Returns only records that exist in BOTH tables.
+*/
+
+
+-- Why this query: to show students who have at least one activity.
+-- Why INNER JOIN: students without activities are excluded.
 select s.student_id, s.name, a.activity_name
 from students s 
 inner join student_activities a
 on s.student_id = a.student_id;
+-- ----------------------------------------------------------------------------
+
+/*
+LEFT JOIN:
+Returns ALL students, even if they have no activities.
+*/
 
 
+-- Why this query: to identify students who are not involved in any activity.
+-- Why LEFT JOIN: students are the main table, so we include all of them.
+select s.student_id, s.name, a.activity_name
+from students s
+left join
+student_activities a
+on s.student_id = a.student_id
+where a.activity_name is null;
+
+-- Why this query: to count how many students are not involved in any activity.
+-- Why LEFT JOIN: students are the main table, so we include all of them.
+select count(*) as no_activity_name
+from students s
+left join
+student_activities a
+on s.student_id = a.student_id
+where a.activity_name is null;
+-- ----------------------------------------------------------------------------
+
+/*
+RIGHT JOIN:
+Returns ALL activities, even if the student does not exist.
+*/
 
 
+-- Why this query: to find activities that are not linked to any student.
+-- Why RIGHT JOIN: activities are the main table, so we include all of them.
+select s.student_id, s.name, a.activity_name
+from students s
+right join student_activities a
+on s.student_id = a.student_id
+where s.name is null;
+
+-- Why this query: to list all activities with the number of students in each
+-- RIGHT JOIN ensures all activities are included, even if no students
+select a.activity_name, count(a.activity_name) as activity_count, count(s.student_id) as student_count 
+from students s
+right join student_activities a
+on s.student_id = a.student_id
+group by activity_name
+order by student_count desc;
+-- ------------------------------------------------------------------------
+
+/*
+FULL OUTER JOIN (using UNION):
+Returns ALL students and ALL activities, matched if possible.
+*/
+
+-- Why this query: to see everything from both tables in one result.
+-- Why UNION of LEFT and RIGHT JOIN: MySQL Workbench does not support FULL JOIN directly.
+select s.name, a.activity_name
+from students s
+left join student_activities a
+on s.student_id = a.student_id
+
+union
+
+select s.name, a.activity_name
+from students s
+right join student_activities a
+on s.student_id = a.student_id;
+
+
+-- Why this query: to find all "unlinked" records in both tables
+-- UNION combines students with no activities and activities with no students
+select s.student_id, s.name, 'No Activity' as info
+from students s
+left join student_activities a
+on s.student_id = a.student_id
+where a.activity_id is null
+
+union
+
+select a.activity_id, a.activity_name, 'No Student' as info
+from students s
+right join student_activities a
+on s.student_id = a.student_id
+where s.student_id is null;
 
 
 
