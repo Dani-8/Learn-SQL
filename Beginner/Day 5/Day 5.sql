@@ -20,7 +20,7 @@ INNER JOIN, LEFT JOIN, RIGHT JOIN, & UNION.
 
 -- ====================================================
 
-show databases;     -- List all databases to see what exists
+show databases;               -- List all databases to see what exists
 
 create database student_db;   -- Create a new database for student tables
 
@@ -204,6 +204,19 @@ from students s
 right join student_activities a
 on s.student_id = a.student_id
 where s.student_id is null;
+-- ------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -231,15 +244,3 @@ Steps:
 
 That’s it 👍
 */
-
-
-
-
-
-
-
-
-
-
-
-
