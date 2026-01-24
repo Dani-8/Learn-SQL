@@ -26,6 +26,18 @@ SQL JOINs help you extract related information from different tables using a sha
 
 ---
 
+
+## 🔹 Real practice
+You joined the `students` table with `student_activities` to:
+- find students with activities  
+- find students with no activities  
+- find activities with no students  
+- count activities per student  
+- use `HAVING` with JOINs
+
+---
+
+
 ## ▶ How to Run
 
 Make sure you are using the correct database before running the queries:
