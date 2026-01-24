@@ -208,10 +208,23 @@ where s.student_id is null;
 
 
 
--- Why this query: to list every student who has at least one activity
--- Why INNER JOIN: only students with activities are included
+select * from students;
+select * from student_activities;
+
+-- ------------------------------------------------------------------------
 
 
+-- Why this query: to show students who are active
+-- Why INNER JOIN: only students with activities included
+select s.student_id, s.name, a.activity_name
+from students s 
+inner join student_activities a
+on s.student_id = a.student_id
+where s.student_id in (
+	select student_id
+	from students
+    group by student_id
+);
 
 
 
