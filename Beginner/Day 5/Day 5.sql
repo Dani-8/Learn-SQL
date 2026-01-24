@@ -208,6 +208,9 @@ where s.student_id is null;
 
 
 
+-- Why this query: to list every student who has at least one activity
+
+
 
 
 
