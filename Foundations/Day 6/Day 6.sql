@@ -160,6 +160,11 @@ select * from high_salary_emp;
 Update employees’ salary to 10% bonus if their salary is below the city average.
 */
 
+update employees_subqueries set salary = salary * 1.1
+where salary < (
+	select avg(salary) from employees_subqueries e2
+    where e2.city = employees_subqueries.city
+)
 
 
 
