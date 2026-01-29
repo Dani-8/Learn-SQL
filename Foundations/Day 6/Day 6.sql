@@ -1,12 +1,16 @@
 
 
 
-show databases;
+show databases;   				-- List all databases to see available ones
 
-use new_sql;
+use new_sql;      				-- Switch to the database where we'll work
 
-show tables;
+show tables;      				-- Check if any tables exist in the database
 
+/*
+Create the 'employees_subqueries' table.
+This table will store employee information for practicing subqueries.
+*/
 create table employees_subqueries (
 	Emp_id int primary key,
     Name varchar(50),
@@ -17,6 +21,7 @@ create table employees_subqueries (
     Salary int
 );
 
+-- Insert sample employee data into the table
 insert into employees_subqueries values
 (1, 'Alice', 25, 'F', '2020-01-15', 'New York', 50000),
 (2, 'Bob', 30, 'M', '2019-03-22', 'Chicago', 60000),
@@ -45,10 +50,11 @@ insert into employees_subqueries values
 (25, 'Zach', 35, 'M', '2016-06-12', 'Los Angeles', 80000);
 
 
+-- Check the inserted employee records
 select * from employees_subqueries;
 
 -- -------------------------------------------------------- 
--- -------------------------------------------------------- 
+-- ------------------- SUBQUERY PRACTICE -----------------
 -- -------------------------------------------------------- 
 
 /*
