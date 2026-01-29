@@ -156,6 +156,7 @@ select * from high_salary_emp;
 
 
 /*
+2. Question:
 
 */
 
