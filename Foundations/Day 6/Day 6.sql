@@ -155,15 +155,25 @@ where salary > (
 select * from high_salary_emp;
 
 
+
 /*
 2. Question:
-Update employees salary by 10% if their salary is below the company average
+Update employees salary by 10% if their salary is below the company average.
 */
+SET SQL_SAFE_UPDATES = 0;
+
+update employees_subqueries set salary = salary * 1.1
+where salary < (
+	select avg_salary from (
+		select avg(salary) as avg_salary
+        from employees_subqueries
+    ) t
+);
+
+SET SQL_SAFE_UPDATES = 1;
 
 
-
-
-
+select * from employees_subqueries;
 
 
 
