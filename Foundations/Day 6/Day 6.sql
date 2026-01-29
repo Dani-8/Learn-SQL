@@ -1,4 +1,23 @@
+-- Day 6
 
+/*
+Today we are going to learn about SQL SUBQUERIES.
+Subqueries are queries nested inside another query, used to perform operations in multiple steps.
+
+Example:
+We can find employees whose salary is above the company average
+by first calculating the average using a subquery.
+*/
+
+/*
+Subqueries can be used with:
+SELECT, INSERT, UPDATE, DELETE
+and often with aggregate functions like AVG, MAX, MIN.
+*/
+
+-- ===========================================================================
+-- ===========================================================================
+-- ===========================================================================
 
 
 show databases;   				-- List all databases to see available ones
@@ -232,5 +251,7 @@ select * from employees_subqueries;                       -- VERIFY THE REMAININ
 
 
 
-
-
+-- 🎉 End of Day 6:
+-- You practiced using subqueries for SELECT, INSERT, UPDATE, and DELETE.
+-- You learned how to use subqueries with aggregate functions and in conditional operations.
+-- This is a major step toward writing more dynamic and powerful SQL queries.
