@@ -160,7 +160,9 @@ select * from high_salary_emp;
 2. Question:
 Update employees salary by 10% if their salary is below the company average.
 */
-SET SQL_SAFE_UPDATES = 0;
+select * from employees_subqueries;                       -- CHECK THE SALARY OF EACH EMP 
+
+SET SQL_SAFE_UPDATES = 0;                                 -- SOMETIMES MYSQL WORKBENCH IS OVERPROTECTIVE SO RUN THIS 
 
 update employees_subqueries set salary = salary * 1.1
 where salary < (
@@ -170,11 +172,16 @@ where salary < (
     ) t
 );
 
-SET SQL_SAFE_UPDATES = 1;
+SET SQL_SAFE_UPDATES = 1;                                 -- AFTER RUN THE QUREY RUN THIS
 
 
-select * from employees_subqueries;
+select * from employees_subqueries;                       -- NOW CHECK THE UPDATED SALARY OF EACH EMP 
 
+
+/*
+3. Question:
+Delete employees whose salary is below the minimum salary is another table.
+*/
 
 
 
