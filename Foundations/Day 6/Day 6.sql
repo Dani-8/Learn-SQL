@@ -171,13 +171,15 @@ select * from high_salary_emp;
 
 
 /*
-2. Question:
-Update employees salary by 10% if their salary is below the company average.
+2. Update employees' salary by 10% if below company average.
+Subquery calculates average, outer query increases salary for eligible employees.
+
+Safe update mode is disabled temporarily to allow the operation.
 */
 
-select * from employees_subqueries;                       -- CHECK THE SALARY OF EACH EMP 
+select * from employees_subqueries;                       -- CHECK CURRENT SALARY
 
-SET SQL_SAFE_UPDATES = 0;                                 -- SOMETIMES MYSQL WORKBENCH IS OVERPROTECTIVE SO RUN THIS 
+SET SQL_SAFE_UPDATES = 0;                                 -- Disable safe updates temporarily (MySQL Workbench is overprotective) 
 
 update employees_subqueries set salary = salary * 1.1
 where salary < (
@@ -187,26 +189,29 @@ where salary < (
     ) t
 );
 
-SET SQL_SAFE_UPDATES = 1;                                 -- AFTER RUN THE QUREY RUN THIS
+SET SQL_SAFE_UPDATES = 1;                                 -- Re-enable safe updates
 
 
-select * from employees_subqueries;                       -- NOW CHECK THE UPDATED SALARY OF EACH EMP 
+select * from employees_subqueries;                       -- VERIFY UPDATED SALARIES
 
 
 /*
 3. Question:
 Delete employees whose salary is below the minimum salary is another table.
+Use subquery to find the average, outer query deletes employees earning less.
+
+Safe update mode is disabled temporarily to allow deletion.
 */
 
-select avg(salary) from employees_subqueries;             -- FIRST CHECK THE AVERAGE SALARY OF EMPS FROM THE TBALE
+select avg(salary) from employees_subqueries;             -- FIRST CHECK THE AVERAGE SALARY
 
 select * from employees_subqueries
 where salary < (
-	select avg(salary) from employees_subqueries          -- RUN THIS QUREY TO SEE HOW MANY EMP ARE, THIS QUREY SHOWING!!!
+	select avg(salary) from employees_subqueries          -- PREVIEW EMPLOYEES TO BE DELETE
 );
 
 
-SET SQL_SAFE_UPDATES = 0;                                 -- SOMETIMES MYSQL WORKBENCH IS OVERPROTECTIVE SO RUN THIS 
+SET SQL_SAFE_UPDATES = 0;                                 -- DISABLE SAFE UPDATES
 
 delete from employees_subqueries
 where salary < (
@@ -215,10 +220,10 @@ where salary < (
 	) t
 );
 
-SET SQL_SAFE_UPDATES = 1;                                 -- AFTER RUN THE QUREY RUN THIS
+SET SQL_SAFE_UPDATES = 1;                                 -- RE-ENABLE SAFE UPDATES
 
 
-select * from employees_subqueries;                       -- NOW CHECK THE UPDATED SALARY OF EACH EMP 
+select * from employees_subqueries;                       -- VERIFY THE REMAINING EMPLOYEES
 
 
 
