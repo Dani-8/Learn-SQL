@@ -183,8 +183,27 @@ select * from employees_subqueries;                       -- NOW CHECK THE UPDAT
 Delete employees whose salary is below the minimum salary is another table.
 */
 
+select avg(salary) from employees_subqueries;             -- FIRST CHECK THE AVERAGE SALARY OF EMPS FROM THE TBALE
+
+select * from employees_subqueries
+where salary < (
+	select avg(salary) from employees_subqueries          -- RUN THIS QUREY TO SEE HOW MANY EMP ARE, THIS QUREY SHOWING!!!
+);
 
 
+SET SQL_SAFE_UPDATES = 0;                                 -- SOMETIMES MYSQL WORKBENCH IS OVERPROTECTIVE SO RUN THIS 
+
+delete from employees_subqueries
+where salary < (
+	select avg_salary from ( 							  -- NOW RUN THIS QUREY TO DELETE THEM.
+		select avg(salary) as avg_salary from employees_subqueries
+	) t
+);
+
+SET SQL_SAFE_UPDATES = 1;                                 -- AFTER RUN THE QUREY RUN THIS
+
+
+select * from employees_subqueries;                       -- NOW CHECK THE UPDATED SALARY OF EACH EMP 
 
 
 
