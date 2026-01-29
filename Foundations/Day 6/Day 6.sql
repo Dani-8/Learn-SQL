@@ -157,7 +157,7 @@ select * from high_salary_emp;
 
 /*
 2. Question:
-
+Update employees salary by 10% if their salary is below the company average
 */
 
 
