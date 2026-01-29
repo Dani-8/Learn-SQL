@@ -47,6 +47,7 @@ insert into employees_subqueries values
 (22, 'Wendy', 30, 'F', '2019-05-10', 'Boston', 60000),
 (23, 'Xavier', 29, 'M', '2020-02-14', 'Seattle', 61000),
 (24, 'Yvonne', 32, 'F', '2017-03-30', 'New York', 72000),
+(19, 'Daniel', 21, 'M', '2021-07-08', 'Chicago', 95000),
 (25, 'Zach', 35, 'M', '2016-06-12', 'Los Angeles', 80000);
 
 
@@ -60,6 +61,7 @@ select * from employees_subqueries;
 /*
 1. Question:
 Get all employees whose salary is above the average salary.
+Subquery (inner query) calculates the average salary, outer query selects employees above it.
 */
 select * from employees_subqueries
 where salary > (
@@ -71,6 +73,7 @@ where salary > (
 /*
 2. Question:
 Find employees who joined after the youngest employee in the company.
+Subquery (inner query) finds the earliest date of joining, outer query compares DOJ.
 */
 select * from employees_subqueries
 where doj > (
@@ -82,9 +85,10 @@ where doj > (
 /*
 3. Question:
 Get employees whose salary is higher than the salary of 'Bob'.
+First, check Bob's salary, then select employees earning more than him.
 */
 select * from employees_subqueries
-where name = "Bob";
+where name = "Bob";								 -- Verify Bob's salary
 
 select * from employees_subqueries
 where salary > (
@@ -98,6 +102,7 @@ where salary > (
 /*
 4. Question:
 Find the employee(s) who has the maximum salary.
+Subquery finds the max salary, outer query selects the matching employee(s).
 */
 select * from employees_subqueries
 where salary = (
@@ -109,6 +114,7 @@ where salary = (
 /*
 5. Question:
 Find employees who work in a city where the average salary is more than 60,000.
+Subquery calculates average salary per city; outer query selects employees in those cities.
 */
 select city from employees_subqueries
 group by city
@@ -126,6 +132,7 @@ where city in (
 /*
 6. Question:
 Get employees whose salary is higher than everyone in Boston.
+Subquery finds the max salary in Boston; outer query selects employees earning more than that.
 */
 select max(salary) from employees_subqueries
 where city = "Boston";
@@ -138,13 +145,14 @@ where salary > (
 
 -- =======================================================================
 
---        ADVANCED SUBQUERIES (INSERT / UPDATE / DELETE)
+-- ------------ ADVANCED SUBQUERIES (INSERT/UPDATE/DELETE) ---------------
 
 -- =======================================================================
 
 /*
 1. Question:
 Insert all employees whose salary is above the overall average into a new table.
+Use CREATE TABLE LIKE to copy structure, then INSERT with subquery.
 */
 
 -- CREATE TABLE
@@ -166,6 +174,7 @@ select * from high_salary_emp;
 2. Question:
 Update employees salary by 10% if their salary is below the company average.
 */
+
 select * from employees_subqueries;                       -- CHECK THE SALARY OF EACH EMP 
 
 SET SQL_SAFE_UPDATES = 0;                                 -- SOMETIMES MYSQL WORKBENCH IS OVERPROTECTIVE SO RUN THIS 
